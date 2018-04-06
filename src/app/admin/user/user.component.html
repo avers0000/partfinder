@@ -1,0 +1,18 @@
+<h1 class="mb-0">{{ user.profile.firstName + ' ' + user.profile.lastName }}</h1>
+<hr class="mt-1">
+<div class="row mt-2 mb-3 mx-0">
+  <ul class="col-12 nav nav-tabs nav-fill">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': view === 'profile'}" (click)="switchView('profile')" >Учетная запись</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': view === 'current'}" (click)="switchView('current')" >Текущие заказы</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': view === 'history'}" (click)="switchView('history')">История заказов</a>
+    </li>
+  </ul>
+</div>
+
+<app-user-profile [user]="user" *ngIf="view === 'profile'"></app-user-profile>
+<app-user-orders [orders]="orders" [view]="view" *ngIf="view && view !== 'profile'"></app-user-orders>

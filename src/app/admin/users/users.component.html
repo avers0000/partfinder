@@ -1,0 +1,54 @@
+<h1 class="mb-0">Пользователи</h1>
+<hr class="mt-1">
+<table class="table table-sm w-100">
+  <thead>
+    <tr>
+      <th>
+        Имя
+      </th>
+      <th>
+        Фамилия
+      </th>
+      <th>
+        Основной Email (Логин)
+      </th>
+      <th class="text-center">
+        Тип
+      </th>
+      <th class="text-center">
+        Статус
+      </th>
+      <th class="text-center">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        {{ user.profile.firstName }}
+      </td>
+      <td>
+        {{ user.profile.lastName }}        
+      </td>
+      <td width="300">
+        <a (click)="navigateUser(user.userId)">
+          {{ user.email }}        
+        </a>
+      </td>
+      <td width="150" class="text-center">
+        <span class="badge" [ngClass] ="getTypeCss(user.type)">
+          {{ user.type | enumAlias:userTypeAlias | uppercase }}
+        </span>
+      </td>
+      <td width="150" class="text-center">
+        <span class="badge badge-pill" [ngClass] ="getStatusCss(user.status)">
+          {{ user.status | enumAlias:userStatusAlias | uppercase }}
+        </span>
+      </td>
+      <td class="text-center" style="width:60px;">
+        <a *ngIf="user.status != 2" (click)="delete(user.userId)" title="удалить"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      </td>    
+    </tr>
+  </tbody>
+</table>

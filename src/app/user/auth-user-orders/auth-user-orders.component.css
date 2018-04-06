@@ -1,0 +1,21 @@
+th {
+    text-align: center;
+}
+
+/* tr {
+    border-bottom: 1px solid lightgray;
+}
+
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+} */
+
+a {
+    cursor: pointer;
+    color: blue;
+}
+
+a :hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,60 @@
+<h1 class="mb-0">{{ header }}</h1>
+<hr class="mt-1">
+<div class="row mx-0">
+  <ul class="col-12 nav nav-tabs nav-fill">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': currentView}" (click)="toggleView()" >Текущие</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': !currentView}" (click)="toggleView()">История заказов</a>
+    </li>
+  </ul>
+</div>
+<table *ngIf="ordersView.length > 0; else empty" class="table table-sm mt-2">
+  <thead>
+    <tr>
+      <th scope="col">
+        № п/п
+      </th>
+      <th>
+          № заказа
+      </th>
+      <th>
+        Дата
+      </th>
+      <th>
+        Сумма
+      </th>
+      <th>
+        Статус
+      </th>
+    </tr>
+  </thead>
+  <tfoot class="font-weight-bold">
+    <td colspan="2">Всего {{ ordersView.length }}</td>
+    <td class="text-right pr-5">{{ totalSum | currency }}</td>
+    <td></td>
+  </tfoot>
+  <tbody>
+    <tr *ngFor="let order of ordersView; let i = index">
+      <td class="text-right pr-4" width="70">
+        {{ i + 1 }}
+      </td>
+      <td>
+        <a [routerLink]="['/user-orders', order.id]">
+          {{ order.id | shorten: 8 }}
+        </a>
+      </td>
+      <td class="pl-5">
+        {{ order.createdDate | date:'short' }}
+      </td>
+      <td class="text-right pr-5" width="200">
+        {{ order.totalCost | currency }}
+      </td>
+      <td class="text-center" width="200">
+        <span class="badge badge-pill" [ngClass] ="getStatusCss(order.status)">{{ order.status | enumAlias:orderStatusAlias | uppercase }}</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #empty>Нет заказов</ng-template>

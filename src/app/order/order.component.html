@@ -1,0 +1,108 @@
+<h1 class="mb-0">{{ header }}</h1>
+<hr class="mt-1 mb-1">
+<a class="d-block mb-2" (click)="navigateBack()">
+  <i class="fa fa-angle-double-left" aria-hidden="true"></i> Назад
+</a>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Номер заказа
+  </div>
+  <div class="col-8">
+    {{ order.id }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Пользователь
+  </div>
+  <div class="col-8">
+    <a (click) = "navigateUser()">{{ order.user.profile.firstName }} {{ order.user.profile.lastName }}</a>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Дата
+  </div>
+  <div class="col-8">
+    {{ order.createdDate | date:'short' }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Статус
+  </div>
+  <div class="col-3">
+    <span class="badge badge-pill" [ngClass] ="getStatusCss(order.status)">
+      {{ order.status | enumAlias: orderStatusAlias | uppercase }}
+    </span>
+  </div>
+  <div class="col-5 pl-0" appDropdown *ngIf="availableStatuses.length > 0">
+    <button class="btn btn-danger btn-sm" 
+      appDropdownToggle
+      type="button" id="dropdownMenuButton" 
+      data-toggle="dropdown" aria-expanded="false">
+      Изменить статус: 
+    </button>
+    <div appDropdownMenu [autoClose]="true" aria-labelledby="dropdownMenuButton">
+      <a *ngFor="let status of availableStatuses" class="dropdown-item" (click) = "changeStatus(status)">
+        <span class="badge badge-pill" [ngClass] ="getStatusCss(status)">
+          {{ status | enumAlias: orderStatusAlias | uppercase }}
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- <div class="row mb-2">
+  <div class="col-3 offset-1">
+    Имя
+  </div>
+  <div class="col-8">
+    {{ user.profile.firstName }}
+  </div>
+</div> -->
+<table class="table table-sm mt-3">
+    <thead>
+      <tr>
+        <th>
+          № п/п
+        </th>
+        <th>
+          Товар
+        </th>
+        <th>
+          Цена
+        </th>
+        <th>
+          Количество
+        </th>
+        <th>
+          Итого
+        </th>
+      </tr>
+    </thead>
+    <tfoot class="font-weight-bold">
+      <td colspan="4" class="text-right">Итого:</td>
+      <td colspan="1" class="text-right">{{ order.totalCost | currency }}</td>
+    </tfoot>
+    <tbody>
+      <tr *ngFor="let item of order.items; let i=index">
+        <td class="text-center">
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ item.name }}
+          <!-- <a  (click)="navigateProduct()">{{ item.name }}</a> -->
+        </td>
+        <td class="text-right">
+          {{ item.price | currency }}
+        </td>
+        <td class="text-center" style="width:140px;">
+          {{ item.quantity }}
+        </td>
+        <td class="text-right">
+          {{ item.price * item.quantity | currency }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

@@ -1,0 +1,40 @@
+<h1 class="mb-0">{{ header }}</h1>
+<hr class="mt-1">
+<table *ngIf="cartItems.length > 0; else empty" class="w-100">
+  <thead>
+    <tr>
+      <th>
+        Товар
+      </th>
+      <th>
+        Цена
+      </th>
+      <th>
+        Количество
+      </th>
+      <th>
+        Итого
+      </th>
+      <th>
+        <a (click)="clearCart()" title="Очистить корзину"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      </th>
+    </tr>
+  </thead>
+  <tfoot class="font-weight-bold">
+    <td colspan="3" class="text-right">Итого:</td>
+    <td colspan="2" class="text-right" style="padding-right: 60px;">{{ sum | currency }}</td>
+  </tfoot>
+  <tbody>
+    <tr app-cart-item 
+      *ngFor="let item of cartItems" 
+      [cartItem]="item"
+    ></tr>
+  </tbody>
+</table>
+<ng-template #empty>Ваша корзина пуста</ng-template>
+<br>
+<div class="text-center">
+  <p *ngIf="!isAuthenticated && cartItems.length > 0">Для оформления заказа необходимо войти в свою учетную запись</p>
+  <button type="button" class="btn btn-success btn-lg" [disabled]="cartItems.length < 1" (click)="makeOrder()" *ngIf="isAuthenticated && !createdOrderId && cartItems.length > 0">Оформить заказ</button>
+  <p *ngIf="createdOrderId">Заказ № {{ createdOrderId }} успешно принят</p>
+</div>

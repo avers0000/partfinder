@@ -1,0 +1,13 @@
+a {
+    cursor: pointer;
+    color: blue !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}
+
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

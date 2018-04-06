@@ -1,0 +1,19 @@
+<div *ngIf="products && !extended" class="col-12 p-0">
+    <div class="row">
+        <app-product-list-item 
+            *ngFor="let product of products" 
+            [product]="product" 
+            class="col-12 col-md-4 mb-3">
+        </app-product-list-item>
+    </div>
+</div>
+<div *ngIf="products && extended" class="col-12 p-0">
+    <div class="row">
+        <app-product-list-item-extended 
+            *ngFor="let product of products" 
+            [product]="product" 
+            class="col-12 mb-3">
+        </app-product-list-item-extended>
+    </div>
+</div> 
+

@@ -1,0 +1,65 @@
+<h1 class="mb-0">{{ header }}</h1>
+<hr class="mt-1">
+<div class="row">
+  <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2">
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+    <div class="alert alert-success" role="alert" *ngIf="success">
+      Данные сохранены
+    </div>
+    <form [formGroup]="profileForm" (ngSubmit)="onSave()"  [ngClass]="{'was-validated': !profileForm.valid && profileForm.touched }">
+      <div class="form-group">
+        <label for="email">Основной Email</label>
+        <input type="email" id="email" readonly class="form-control" formControlName="email">
+      </div>
+      <div class="form-group">
+        <label for="firstName">Имя</label>
+        <input type="text" id="firstName" class="form-control" formControlName="firstName">
+      </div>
+      <div class="form-group">
+          <label for="lastName">Фамилия</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <label for="email2">Дополнительный Email</label>
+        <input type="email" id="email2" class="form-control" formControlName="email2">
+        <div class="invalid-feedback" *ngIf="!profileForm.get('email2').valid && profileForm.get('email2').touched">
+          <span *ngIf="profileForm.get('email2').errors['email']">Введите правильный Email</span>
+          <span *ngIf="profileForm.get('email2').errors['alreadyUsed']">Дополнительный Email не должен совпадать с основным</span>
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="address">Адрес</label>
+          <input type="text" id="address" class="form-control" formControlName="address">
+      </div>
+      <div formArrayName="phones">
+        <p class="mb-1">Контактные телефоны:</p>
+        <div class="form-inline row py-1" *ngFor="let phoneControl of profileForm.get('phones')['controls']; let i=index">
+          <label class="col-1 text-right pr-0 align-self-center" for="i">{{ i + 1 }}:</label>
+          <div class="col-8">
+            <div class="input-group">
+              <input type="text" id="i" class="form-control" [formControlName]="i">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary removehButton" type="button" (click)="onRemovePhone(i)"><i class="fa fa-times" aria-hidden="true" ></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <button *ngIf="profileForm.get('phones').controls.length == i+1 && phoneControl.value" class="btn btn-success" type="button" (click)="onAddPhone()">
+              <i class="fa fa-plus-circle" aria-hidden="true" ></i> Добавить
+            </button>
+          </div>
+          <!-- <div class="invalid-feedback" *ngIf="!password.valid && password.touched">
+            Пароль должен содержать не менее 6 символов
+          </div> -->
+        </div> 
+        <button *ngIf="profileForm.get('phones')['controls'].length == 0" class="btn btn-success" type="button" (click)="onAddPhone()"><i class="fa fa-plus-circle" aria-hidden="true" ></i> Добавить</button>
+      </div>
+      <div class="mt-4">
+          <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid || !profileForm.dirty">Сохранить</button>
+          <button class="btn btn-secondary" type="button" (click)="onCancel()" [disabled]="!profileForm.dirty">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>

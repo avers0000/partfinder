@@ -1,0 +1,30 @@
+input.ng-invalid.ng-touched {
+    border-color: red;
+}
+
+.input-group-append {
+    margin-left: -1px;
+    display: flex;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
+.removehButton {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    border: 1px solid #ced4da;
+    color: red;
+    margin-left: -1px;
+}
+
+button:not([disabled]){
+    cursor: pointer;
+}
+
+.was-validated .form-control~.invalid-feedback {
+    display: block;
+}

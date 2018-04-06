@@ -1,0 +1,7 @@
+<app-product *ngIf="catalogState && catalogState.productId" [productId]="catalogState.productId"></app-product>
+<ng-container *ngIf="catalogState && !catalogState.productId">
+    <h1 class="mb-0">{{ header }}</h1>
+    <hr class="mt-1">
+    <app-next-level-menu class="row"></app-next-level-menu>
+    <app-search-results class="card"></app-search-results>
+</ng-container>

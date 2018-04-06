@@ -1,0 +1,66 @@
+<ng-container *ngIf="product">
+  <div class="row">
+    <div class="col-12">
+        <h1 class="mb-0">{{ header }}</h1>
+        <hr class="mt-1 clearfix">
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="row">
+        <div class="col-12">
+          <img 
+            *ngIf="selectedImage != null; else defaultPhoto" 
+            [src]="product.photos[selectedImage]" 
+            [alt]="'Фото ' + (selectedImage + 1)" 
+            [title]="'Фото ' + (selectedImage + 1)" 
+            class="img-thumbnail w-100" 
+          >
+          <ng-template #defaultPhoto>
+            <img 
+              src="http://atom96.ru/wp-content/uploads/2017/10/%D0%BD%D0%B5%D1%82-%D1%84%D0%BE%D1%82%D0%BE.png" 
+              alt="Нет фото" 
+              title="Нет фото" 
+              class="img-thumbnail w-100" 
+            >
+          </ng-template>    
+        </div>
+      </div>
+      <div class="d-flex mt-2 flex-wrap">
+        <a *ngFor="let photo of product.photos; let i=index" class="img-thumbnail d-flex align-items-center" style="width: 60px; height: 60px;"  [ngClass]="{'selected': i === selectedImage}">
+          <img 
+            [src]="photo" 
+            [alt]="'Фото ' + (i + 1)" 
+            [title]="'Фото ' + (i + 1)" 
+            class="w-100" 
+            (click)="onImageSelect(i)"
+          >
+        </a>
+      </div>
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="d-flex">
+        <h5>Код детали: {{ product.code }}</h5>
+        <p class="ml-auto">ID: {{ product.id}}</p>
+      </div>
+      <div>Категория: 
+        <a (click)="navigateCategory()">{{ product.category.caption }}</a> /
+        <a (click)="navigateGroup()">{{ product.group.caption }}</a>
+      </div>
+      <div>Марка: 
+        <a (click)="navigateManufacturer()">{{ product.manufacturer.caption }}</a>
+      </div>
+      <div>Модель: 
+        <a (click)="navigateModel()">{{ product.model.caption }}</a>    
+      </div>
+      <p>Модификация: {{ product.modification }}</p> 
+      <div class="d-flex align-items-center">
+        <h5 class="m-0">Цена: {{ product.price | currency }}</h5>
+        <button type="button" class="btn btn-primary ml-auto" (click)="addToCart()"><i class="fa fa-cart-plus" aria-hidden="true"></i> В корзину</button>
+      </div>
+      <hr>
+      <h5>Описание товара:</h5>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+</ng-container>

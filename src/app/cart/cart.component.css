@@ -1,0 +1,20 @@
+th {
+    text-align: center;
+}
+
+tr {
+    border-bottom: 1px solid lightgray;
+}
+
+a {
+    cursor: pointer;
+    color: red !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}
+
+button {
+    cursor: pointer;
+}

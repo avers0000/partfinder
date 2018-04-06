@@ -1,0 +1,49 @@
+<form>
+  <div class="form-row">
+    <div class="form-group col-12 col-md-3">
+      <label class="m-0 pt-1" for="manufacturer">Марка</label>
+      <select id="manufacturer" name="manufacturer" class="form-control" [compareWith]="compareMenuItems" [(ngModel)]="manufacturerSelected" (change)="onManufacturerChange()">
+        <option [ngValue]="optionLabel">{{ optionLabel.caption }}</option>
+        <option *ngFor="let manufacturer of manufacturers" [ngValue]="manufacturer">{{ manufacturer.caption }}</option>
+      </select>
+    </div>
+    <div class="form-group col-12 col-md-3">
+      <label class="m-0 pt-1" for="model">Модель</label>
+      <select id="model" name="model" class="form-control" [compareWith]="compareMenuItems" [(ngModel)]="modelSelected" (change)="onModelChange()">
+        <option [ngValue]="optionLabel">{{ optionLabel.caption }}</option>
+        <option *ngFor="let model of models" [ngValue]="model">{{ model.caption }}</option>
+      </select>
+    </div>
+    <div class="form-group col-12 col-md-3">
+      <label class="m-0 pt-1" for="category">Категория</label>
+      <select id="category" name="category" class="form-control" [compareWith]="compareMenuItems" [(ngModel)]="categorySelected" (change)="onCategoryChange()">
+        <option [ngValue]="optionLabel">{{ optionLabel.caption }}</option>
+        <option *ngFor="let category of categories" [ngValue]="category">{{ category.caption }}</option>
+      </select>
+    </div>
+    <div class="form-group col-12 col-md-3">
+      <label class="m-0 pt-1" for="group">Детали</label>
+      <select id="group" name="group" class="form-control" [compareWith]="compareMenuItems" [(ngModel)]="groupSelected" (change)="onGroupChange()">
+        <option [ngValue]="optionLabel">{{ optionLabel.caption }}</option>
+        <option *ngFor="let group of groups" [ngValue]="group">{{ group.caption }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row pt-2">
+    <div class="form-group col-10">
+      <label for="searchText" class="sr-only">Поиск</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-search"></i></div>
+        </div>        
+        <input id="searchText" name="searchText" class="form-control" type="text" placeholder="Поиск по каталогу" [(ngModel)]="searchText">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary clearSearchButton" type="button" [disabled]="searchText.trim().length === 0"  aria-disabled="searchText.trim().length === 0" (click)="clearSearch()"><i class="fa fa-times" aria-hidden="true" ></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary w-100" [disabled]="searchText.trim().length === 0" (click)="submitForm()"><i class="fa fa-search" aria-hidden="true"></i> Искать</button>
+    </div>
+  </div>
+</form>

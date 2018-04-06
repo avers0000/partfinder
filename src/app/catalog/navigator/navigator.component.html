@@ -1,0 +1,20 @@
+<div class="row mt-2">
+  <div class="col-12">
+    <!-- <div>
+      <button type="button" (click)="getFbData()">Test</button>
+      <button type="button" (click)="getFbData2()">Test 2</button>
+    </div> -->
+    <div class="d-flex border-bottom-0" style="height: 48px; border: 1px solid rgba(0, 0, 0, 0.125); padding-left: 20px;">
+      <h6 class="m-0 align-self-center">Поиск по модели</h6>
+    </div>
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action" 
+        style="cursor: pointer;"
+        [ngClass]="{'active': menuItem.name === selectedmenuItemName}"
+        *ngFor="let menuItem of menuItems"
+        [routerLink]="['/catalog', menuItem.name ]"
+        >{{ menuItem.caption }}
+      </a>
+    </div>
+  </div>
+</div>

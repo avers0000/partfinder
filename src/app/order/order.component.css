@@ -1,0 +1,16 @@
+th {
+    text-align: center;
+}
+
+a {
+    color: blue !important;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}
+
+button {
+    cursor: pointer;
+}

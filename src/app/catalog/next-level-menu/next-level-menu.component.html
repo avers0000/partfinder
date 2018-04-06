@@ -1,0 +1,20 @@
+<div *ngIf="menu != null" class="col-12">
+  <div class="card mb-3">
+    <div class="card-header d-flex border-bottom-0">
+      <a (click)="toggleCollapse()" class="link">
+        <h6 class="m-0">
+          <i *ngIf="show" class="fa fa-chevron-up" aria-hidden="true"></i>
+          <i *ngIf="!show" class="fa fa-chevron-down" aria-hidden="true"></i>
+          {{ menu.caption }} ({{ (menu.items.length > 0) ? menu.items.length : 'Нет' }})
+        </h6>
+      </a>
+    </div>
+    <div class="card-body py-1" [appCollapse]="!show" style="border-top: 1px solid rgba(0,0,0,.125)">
+      <nav class="row">
+        <div class="col-12 col-md-3 p-1" *ngFor="let item of menu.items">
+          <a class="nav-item nav-link active bg-light" (click)="onItemClick(item)">{{ item.caption }}</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

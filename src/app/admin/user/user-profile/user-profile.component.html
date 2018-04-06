@@ -1,0 +1,97 @@
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Тип учетной записи
+  </div>
+  <!-- <div class="col-2">
+    <span class="badge" [ngClass] ="getTypeCss(user.type)">
+      {{ user.type | enumAlias: userTypeAlias | uppercase }}
+    </span>
+  </div> -->
+  <div class="col-md-2">
+    <input type="radio" name="rbType" id="rbTypeUser" value="0"  style="cursor: pointer;"
+      [value]="0" 
+      [(ngModel)]="currentType"
+      (change)="onTypeChange()"
+    >
+    <label class="ml-1 mb-0" for="rbTypeUser">
+      <span class="badge" [ngClass] ="getTypeCss(0)" style="cursor: pointer;">
+        {{ userTypeAlias[0] | uppercase }}
+      </span>
+    </label>
+  </div>
+  <div class="col-md-4">
+    <input type="radio" name="rbType" id="rbTypeAdmin" value="1"  style="cursor: pointer;"
+      [value]="1" 
+      [(ngModel)]="currentType"
+      (change)="onTypeChange()"
+    >
+    <label class="ml-1 mb-0" for="rbTypeAdmin">
+      <span class="badge" [ngClass] ="getTypeCss(1)" style="cursor: pointer;">
+        {{ userTypeAlias[1] | uppercase }}
+      </span>
+    </label>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Статус
+  </div>
+  <div class="col-2">
+    <span class="badge badge-pill" [ngClass] ="getStatusCss(user.status)">
+        {{ user.status | enumAlias: userStatusAlias | uppercase }}
+    </span>
+  </div>
+  <div class="col-mb4">
+    <button type="button" class="btn btn-sm py-0" [ngClass]="getToggleStatusCss()" (click)="toggleStatus()">{{ toggleStatusTitle() }}</button>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Имя
+  </div>
+  <div class="col-8">
+    {{ user.profile.firstName }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Фамилия
+  </div>
+  <div class="col-8">
+    {{ user.profile.lastName }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Основной Email (логин)
+  </div>
+  <div class="col-8">
+    {{ user.email }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Дополнительный Email
+  </div>
+  <div class="col-8">
+    {{ user.profile.email2 }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Адрес
+  </div>
+  <div class="col-8">
+    {{ user.profile.address }}
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3 offset-1">
+    Контактные телефоны
+  </div>
+  <div class="col-8">
+    <ul>
+      <li *ngFor="let phone of user.profile.phones">{{ phone }}</li>
+    </ul>
+  </div>
+</div>

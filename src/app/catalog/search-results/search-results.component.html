@@ -1,0 +1,43 @@
+<ng-container *ngIf="!loading">
+  <div class="card-header d-flex py-2">
+    <h6 class="m-0 align-self-center">
+      Результаты ({{ (products && products.total && products.total > 0) ? products.total : 'Нет' }})
+      <span *ngIf="catalogState.searchText.length > 0">   поиск по'{{ catalogState.searchText }}'</span>
+    </h6>
+    <div class="ml-auto" appDropdown>
+      <button class="btn btn-secondary btn-sm" 
+        appDropdownToggle
+        type="button" id="dropdownMenuButton" 
+        data-toggle="dropdown" aria-expanded="false">
+        Вид: 
+        <i *ngIf="!catalogConfig.extendedView" class="fa fa-th pl-3" aria-hidden="true"></i>
+        <i *ngIf="catalogConfig.extendedView" class="fa fa-list pl-3" aria-hidden="true"></i>
+      </button>
+      <div appDropdownMenu [autoClose]="true" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item pl-3" [ngClass]="{'active': !catalogConfig.extendedView}" (click) = "setView(false)"><i class="fa fa-th pr-3" aria-hidden="true"></i> Плитки</a>
+        <a class="dropdown-item pl-3" [ngClass]="{'active': catalogConfig.extendedView}"  (click) = "setView(true)"><i class="fa fa-list pr-3" aria-hidden="true"></i> Список</a>
+      </div>
+    </div>
+  </div>
+  <app-product-list *ngIf="products && products.total > 0; else empty" [products]="products.data" [extended]="catalogConfig.extendedView" class="row mx-3 mb-0 mt-3"></app-product-list>
+  <ng-template #empty>Результатоа нет</ng-template>
+  <div class="card-footer p-1"  *ngIf="products && products.total > 0; else empty">
+    <nav aria-label="Search results page navigation">
+      <ul class="pagination justify-content-center m-0">
+        <li class="page-item" [ngClass]="{'disabled': catalogState.page < 2}">
+          <a class="page-link" aria-label="Previous" (click)="onPageSelect(catalogState.page - 1)">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li *ngFor="let page of pages" class="page-item" (click)="onPageSelect(page)" [ngClass]="{'active': catalogState.page === page}" ><a class="page-link">{{ page }}</a></li>
+        <li class="page-item" [ngClass]="{'disabled': catalogState.page >= pages.length}">
+          <a class="page-link" aria-label="Next" (click)="onPageSelect(catalogState.page + 1)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</ng-container>

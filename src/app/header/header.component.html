@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand" style="cursor: pointer; color:white;" routerLink="/" routerLinkActive="active">partfinder</a>
+  <!-- <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button"></button> -->
+  <button class="navbar-toggler" (click)="toggleCollapse()" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse mr-auto" [class.show]="show">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link" style="cursor: pointer;" routerLink="/catalog" routerLinkActive="active">Catalog</a></li>
+      <li class="nav-item"><a class="nav-link" style="cursor: pointer;" routerLink="/about" routerLinkActive="active">О нас</a></li>
+      <li class="nav-item"><a class="nav-link" style="cursor: pointer;" routerLink="/contacts" routerLinkActive="active">Контакты</a></li>
+      <li *ngIf="user && user.type == 1" class="nav-item"><a class="nav-link" style="cursor: pointer;" routerLink="/admin/users" routerLinkActive="active">Пользователи</a></li>
+      <li *ngIf="user && user.type == 1" class="nav-item"><a class="nav-link" style="cursor: pointer;" routerLink="/admin/orders" routerLinkActive="active">Заказы</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto flex-row">
+      <li class="nav-item">
+        <a class="nav-link pr-2" style="cursor: pointer;" routerLink="/cart" routerLinkActive="active">
+          <i class="fa fa-shopping-cart fa-fw" title="Корзина"></i> 
+          <span class="d-none d-lg-inline">Корзина</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="!user" appDropdown>
+        <a class="nav-link px-2" style="cursor: pointer;" appDropdownToggle data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
+          <i class="fa fa-sign-in fa-fw" title="Вход"></i> 
+          <span class="d-none d-lg-inline">Вход</span>
+        </a>
+        <div appDropdownMenu aria-labelledby="dropdownMenuButton" style="width: 300px; left: -200px;" class="p-2">
+          <app-signin></app-signin>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="user != null" appDropdown> 
+        <a class="nav-link px-2" style="cursor: pointer;" appDropdownToggle>
+          <i class="fa fa-user"></i> 
+          <span class="d-none d-lg-inline"> {{ user.email }}</span>
+        </a>
+        <div class="dropdown-menu" appDropdownMenu [autoClose]="true">
+            <a class="dropdown-item pl-3" routerLink="/profile" routerLinkActive="active"><i class="fa fa-user-circle" aria-hidden="true"></i> Профиль</a>
+            <a class="dropdown-item pl-3" routerLink="/user-orders" routerLinkActive="active"><i class="fa fa-history" aria-hidden="true"></i> Заказы</a>
+            <a class="dropdown-item pl-3" routerLink="/settings" routerLinkActive="active"><i class="fa fa-cog"></i> Настройки</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item pl-3" (click)="onLogout()"><i class="fa fa-sign-out"></i> Выход</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

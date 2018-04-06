@@ -1,0 +1,16 @@
+<div class="card h-100 text-center">
+  <h5 class="card-header d-flex align-items-center" style="height: 100px;">
+    <a (click)="navigateToProductPage()">{{ header }}</a>
+  </h5>
+  <div class="d-flex align-items-center justify-content-center" style="height: 150px; overflow:hidden; border-bottom: 1px solid rgba(0,0,0,.125);">
+    <img class="mh-100 mw-100" [src]="imgPath" alt="{{ header }}">
+  </div>
+  <p class="card-text text-left px-2">
+    <small class="text-muted">{{ imgCount }}</small>
+    <a (click)="navigateToProductPage()" class="pull-right card-link">Подробнее...</a>
+  </p>
+  <div class="card-body p-0 pb-3">
+    <h5 class="card-title">Цена: {{ product.price | currency }}</h5>
+    <button type="button" class="btn btn-primary" (click)="addToCartClick()"><i class="fa fa-cart-plus" aria-hidden="true"></i> В корзину</button>
+  </div>
+</div>

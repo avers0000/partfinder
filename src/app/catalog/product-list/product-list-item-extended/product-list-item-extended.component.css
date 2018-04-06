@@ -1,0 +1,14 @@
+img {
+    max-width: 250px;
+    object-fit: cover;
+
+}
+
+a {
+    cursor: pointer;
+    color: blue !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}

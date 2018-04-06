@@ -1,0 +1,15 @@
+<td>
+  <a  (click)="navigateProduct()">{{ cartItem.name }}</a>
+</td>
+<td class="text-right">
+  {{ cartItem.price | currency }}
+</td>
+<td class="text-center" style="width:140px;">
+  <input type="number" class="form-control p-0 pl-1 m-auto" [(ngModel)]="currentQuantity" min="1" step="1" style="width: 60px;" (change)="changeQuantity()">
+</td>
+<td class="text-right">
+  {{ cartItem.price * cartItem.quantity | currency }}
+</td>
+<td class="text-center" style="width:60px;">
+  <a (click)="deleteItem()" title="удалить"><i class="fa fa-trash" aria-hidden="true"></i></a>
+</td>
